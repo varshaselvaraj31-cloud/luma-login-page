@@ -11,6 +11,17 @@ npm run dev
 
 Open the Vite URL shown in the terminal (usually `http://localhost:5173`). Vite proxies `/api` requests to the Express server on port `3001`.
 
+## Deploy to Vercel
+
+The repository includes `vercel.json` and an `api/[...path].js` serverless entry so Vercel can build the React app and send `/api/*` requests to the Express API on the same domain.
+
+1. Import the GitHub repository in Vercel and leave the **Root Directory** set to the project root.
+2. Set the **Build Command** to `npm run build` and the **Output Directory** to `dist` (also configured in `vercel.json`).
+3. Deploy. The default `VITE_API_BASE_URL=/api` works for the same-domain API.
+4. Test the deployment with the demo credentials below.
+
+After making changes locally, commit and push them to GitHub so Vercel can deploy the updated files. Demo posts, likes, saves, comments, and follows use server memory and may reset or differ between serverless instances; this demo does not use a persistent database or production authentication.
+
 ## Project folders
 
 ```text

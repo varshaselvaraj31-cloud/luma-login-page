@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const app = express();
 const port = Number(process.env.PORT) || 3001;
+const isVercel = process.env.VERCEL === '1';
 const clientBuildPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../dist');
 
 const demoAccount = {
@@ -248,13 +249,17 @@ app.post('/api/follows', (request, response) => {
   return response.json({ following: followedUsers.has(targetUsername) });
 });
 
-if (existsSync(clientBuildPath)) {
+if (!isVercel && existsSync(clientBuildPath)) {
   app.use(express.static(clientBuildPath));
   app.get('*', (_request, response) => {
     response.sendFile(path.join(clientBuildPath, 'index.html'));
   });
 }
 
-app.listen(port, () => {
-  console.log(`Luma API listening on http://localhost:${port}`);
-});
+if (!isVercel) {
+  app.listen(port, () => {
+    console.log(`Luma API listening on http://localhost:${port}`);
+  });
+}
+
+export default app;
