@@ -1,0 +1,23 @@
+{
+  "name": "luma-login",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:client": "vite frontend --config frontend/vite.config.js",
+    "dev:server": "node --watch backend/index.js",
+    "build": "vite build frontend --config frontend/vite.config.js",
+    "start": "node backend/index.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "express": "^4.21.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.18.4",
+    "vite": "^6.0.5"
+  },
+  "devDependencies": {}
+}
